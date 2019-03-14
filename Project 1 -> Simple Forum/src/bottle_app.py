@@ -2,7 +2,7 @@ from bottle import route, run, request, template, static_file, get, os, default_
 from hashlib import sha256
 import os, json, requests
 
-supportedCurrencies={
+supported_currencies={
 "EUR":"Euro",
 "USD":"US dollar",
 "JPY":"Japanese yen",
@@ -38,7 +38,7 @@ supportedCurrencies={
 "ZAR":"South African rand"
 }
 
-currenciesList={
+currencies_list={
 "EUR": 0,
 "USD": 0,
 "JPY": 0,
@@ -119,17 +119,32 @@ class Database:
       self.users.get(sender).get("Balances").update(currency,self.users.get(sender).get("Balances").get(currency)-amount)
       self.users.get(reciever).get("Balances").update(currency,self.users.get(reciever).get("Balances").get(currency)+amount)
 
+def get_rates(base):#Returns rates as dict
+    url="https://api.exchangeratesapi.io/latest?base="+base
+    response = requests.get(url)
+    data = response.text
+    parsed = json.loads(data)
+    rates = dict(parsed["rates"])
+    del rates[base]
+    for y,x in rates.items():
+        rates[y]=1/x
+    return rates
+
 @route('/')
 def index():
-    return template('index', currNames=supportedCurrencies)
+    return template('index', curr_names=supported_currencies)
 
 @route('/index')
 def index():
-    return template('index', currNames=supportedCurrencies)
+    return template('index', curr_names=supported_currencies)
 
 @route('/index.html')
 def index():
-    return template('index', currNames=supportedCurrencies)
+    return template('index', curr_names=supported_currencies)
+
+@route('/rates/<base>')
+def index(base):
+    return template('currency_rates', base=base, rates=get_rates(base), supported_currencies=supported_currencies)
 
 @get("/static/js/<filepath:re:.*\.js>")
 def js(filepath):

@@ -31,8 +31,8 @@
 				</div>
 				<div class="center">
 					<div class="currency-catalog">
-            % for currency_symbol, currency_name in curr_names.items():
-              <div class="currency-catalog-item"><a href="/rates/{{currency_symbol}}">{{currency_name}} - {{currency_symbol}}</a></div>
+            % for currency_symbol, value in rates.items():
+              <div class="currency-catalog-item">{{supported_currencies[currency_symbol]}} ({{currency_symbol}}) - {{value}} {{supported_currencies[base]}} ({{base}})</div>
             % end
           </div>
 				</div>

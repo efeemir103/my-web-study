@@ -102,14 +102,36 @@ body{
   text-align: center;
 }
 
+.content .center .currency-catalog{
+  overflow: scroll;
+
+  border-radius: 5%;
+  height: 90%;
+  width: 92%;
+  margin: 4%;
+  color: #ffffff;
+}
+
 .content .center .currency-catalog .currency-catalog-item{
-  background-color: rgba(38,50,56,0.9);
-	border-radius: 40% 20% 40% 20%;
-  height: 5%;
+  background-color:  rgba(38,50,56,0.9);
+  border-radius: 5%;
+  height: 10%;
   width: 20%;
+  margin: 5% 5% 5% 40%;
+  padding-top: 2%;
+}
+
+.content .center .currency-catalog .currency-catalog-item a{
   text-align: center;
   text-decoration: none;
   color: #ffffff;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.content .center .currency-catalog .currency-catalog-item:hover{
+  animation: button-lighten-up 1s ease 0s 1;
+  background-color: rgba(130,173,169,0.9);
 }
 
 .content .right-side{
