@@ -104,7 +104,6 @@ body{
 
 .content .center .currency-catalog{
   overflow: scroll;
-
   border-radius: 5%;
   height: 90%;
   width: 92%;
@@ -115,13 +114,11 @@ body{
 .content .center .currency-catalog .currency-catalog-item{
   background-color:  rgba(38,50,56,0.9);
   border-radius: 5%;
-  height: 10%;
+  height: 15%;
   width: 20%;
-  margin: 5% 5% 5% 40%;
+  margin: 5% 5% 5% 7%;
+  float:left;
   padding-top: 2%;
-}
-
-.content .center .currency-catalog .currency-catalog-item a{
   text-align: center;
   text-decoration: none;
   color: #ffffff;

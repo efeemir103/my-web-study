@@ -125,7 +125,8 @@ def get_rates(base):#Returns rates as dict
     data = response.text
     parsed = json.loads(data)
     rates = dict(parsed["rates"])
-    del rates[base]
+    if base in rates:
+        del rates[base]
     for y,x in rates.items():
         rates[y]=1/x
     return rates
@@ -148,12 +149,10 @@ def index(base):
 
 @get("/static/js/<filepath:re:.*\.js>")
 def js(filepath):
-    print(filepath)
     return static_file(filepath, root="static/js")
 
 @get("/static/css/<filepath:re:.*\.css>")
 def css(filepath):
-    print(filepath)
     return static_file(filepath, root="static/css")
 
 debug(True)

@@ -4,15 +4,15 @@
      <title>Homepage of The Master</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-     <link rel="stylesheet" href="static/css/styles.css">
-     <script src="static/js/scripts.js"></script>
+     <link rel="stylesheet" href="../static/css/styles.css">
+     <script src="../static/js/scripts.js"></script>
    </head>
    <body>
 			<div class="navbar">
         <div class="header">
           <h3>VirtFinance</h3>
         </div>
-        <a href="index.html" class="page-button">
+        <a href="../index.html" class="page-button">
 					<div>
 					Home
 					</div>
@@ -30,9 +30,17 @@
 				<div class="left-side">
 				</div>
 				<div class="center">
+          <!--
+          <div class="query-toolbar">
+            <form onsubmit="query_select()">
+              <input type="checkbox" name="enable-long-names" class="extra-info-checkbox"/>Enable long names of Currencies.
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+          !-->
 					<div class="currency-catalog">
             % for currency_symbol, value in rates.items():
-              <div class="currency-catalog-item">{{supported_currencies[currency_symbol]}} ({{currency_symbol}}) - {{value}} {{supported_currencies[base]}} ({{base}})</div>
+              <div class="currency-catalog-item"><span class="extra-info">{{supported_currencies[currency_symbol]}} (</span>{{currency_symbol}}<span class="extra-info">)</span> is {{value}} <span class="extra-info">{{supported_currencies[base]}} (</span>{{base}}<span class="extra-info">)</span></div>
             % end
           </div>
 				</div>

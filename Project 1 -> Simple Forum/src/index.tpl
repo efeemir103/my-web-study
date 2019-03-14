@@ -32,7 +32,7 @@
 				<div class="center">
 					<div class="currency-catalog">
             % for currency_symbol, currency_name in curr_names.items():
-              <div class="currency-catalog-item"><a href="/rates/{{currency_symbol}}">{{currency_name}} - {{currency_symbol}}</a></div>
+              <a href="/rates/{{currency_symbol}}"><div class="currency-catalog-item">{{currency_name}} - {{currency_symbol}}</div></a>
             % end
           </div>
 				</div>
