@@ -4,13 +4,13 @@
      <title>Homepage of The Master</title>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-     <link rel="stylesheet" href="styles.css">
-     <script src="scripts.js"></script>
+     <link rel="stylesheet" href="static/css/styles.css">
+     <script src="static/js/scripts.js"></script>
    </head>
    <body>
 			<div class="navbar">
         <div class="header">
-          <h3>Welcome to my page!</h3>
+          <h3>VirtFinance</h3>
         </div>
         <a href="index.html" class="page-button">
 					<div>
@@ -28,13 +28,15 @@
       <hr style="clear:both;" />
 			<div class="content">
 				<div class="left-side">
-					Left-Side Content...
 				</div>
 				<div class="center">
-					Center Content...
+					<div class="currency-catalog">
+            % for currency_symbol, currency_name in currNames.items():
+              <a href="{{currency_symbol}}" class="currency-catalog-item"><div>{{currency_name}} - {{currency_symbol}}</div></a>
+            % end
+          </div>
 				</div>
 				<div class="right-side">
-					Right-Side Content...
 				</div>
 			</div>
 			<div class="footer">
