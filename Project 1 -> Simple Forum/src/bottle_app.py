@@ -1,6 +1,8 @@
 from bottle import route, run, request, template, static_file, get, os, default_app, debug
 from hashlib import sha256
-import os, json, requests
+import os, json, requests, secrets
+
+starter_currency={"USD":1000}
 
 supported_currencies={
 "EUR":"Euro",
@@ -79,48 +81,68 @@ def create_hash(password):
     return sha256(pw_bytestring).hexdigest()
 
 class Database:
-  def __init__(self,folder):
-    self.users={}
-    self.loggedInUsers={}
-    self.folder=folder
+    def __init__(self,folder):
+        self.users_dict = {}
+        self.user_balances = {}
+        self.loggedInUsers = {}
+        self.folder = folder
 
-  def save(self):
-    with open(os.path.join(self.folder,"users.json"),"w+") as data:
-      json.dump(self.users,data,indent=4)
+    def save_exists(self):
+        return os.path.isfile(os.path.join(self.folder,"accounts.json")) and os.path.isfile(os.path.join(self.folder,"balances.json"))
 
-  def load(self):
-    with open(os.path.join(self.folder,"users.json"),"r") as data:
-      self.users.update(dict(json.load(data)))
+    def load(self):
+        with open(os.path.join(self.folder,"accounts.json"),"r") as data:
+            self.users_dict.update(dict(json.load(data)))
+        with open(os.path.join(self.folder,"balances.json"),"r") as data:
+            self.user_balances.update(dict(json.load(data)))
 
-  def new_user(self,username,password,name):
-    self.users.update(dict(username,{"Name":name,"Password":password,"Balances":currenciesList.copy()}))
+    def save(self):
+        with open(os.path.join(self.folder,"accounts.json"),"w+") as data:
+            json.dump(self.users_dict,data,indent=4)
+        with open(os.path.join(self.folder,"balances.json"),"w+") as data:
+            json.dump(self.user_balances,data,indent=4)
 
-  def remove_user(self,username):
-    del self.users[username]
+    def new_account(self,name,username,password):#Create new user with uid, name, username and balance
+        uid=secrets.token_hex(16)
+        self.users_dict.update({uid:{"name":name,"username":username,"password":password}})
+        self.users_dict.update({uid:currencies_list.copy()})
+        self.users_dict.update(starter_currency.copy())
 
-  def convert(self,base,to):
-    if(base==to):
+    def remove_user(self,uid):
+        del self.users_dict[uid]
+
+    def get_uid(self,username):
+        for key,value in self.users_dict:
+            if value["username"] == username:
+                return key
+        return "error - user not found"
+
+    def exchange(self,sender,base,amount,to):#Currency exchange
+        if self.users_dict.get(sender).get("Balances").get(base)>amount:
+            self.users_dict.get(sender).get("Balances").update(base,self.users_dict.get(sender).get("Balances").get(base)-amount)
+            self.users_dict.get(sender).get("Balances").update(to,self.users_dict.get(sender).get("Balances").get(to)+amount*self.convert(base,to))
+
+    def trade(self,sender,reciever,amount,currency):#Send money between accounts
+        if self.users_dict.get(sender).get("Balances").get(currency)>amount:
+            self.users_dict.get(sender).get("Balances").update(currency,self.users_dict.get(sender).get("Balances").get(currency)-amount)
+            self.users_dict.get(reciever).get("Balances").update(currency,self.users_dict.get(reciever).get("Balances").get(currency)+amount)
+
+
+db=Database("database")
+
+def convert(self,base,to):#convertes a base currency to target currency
+    if base == to:
         return 1
     else:
-      url="https://api.exchangeratesapi.io/latest?base="+base
-      response = requests.get(url)
-      data = response.text
-      parsed = json.loads(data)
-      rates = parsed["rates"]
-      return rates[to]
-
-  def exchange(self,sender,base,amount,to):
-    if self.users.get(sender).get("Balances").get(base)>amount:
-      self.users.get(sender).get("Balances").update(base,self.users.get(sender).get("Balances").get(base)-amount)
-      self.users.get(sender).get("Balances").update(to,self.users.get(sender).get("Balances").get(to)+amount*self.convert(base,to))
-
-  def trade(self,sender,reciever,amount,currency):
-    if self.users.get(sender).get("Balances").get(currency)>amount:
-      self.users.get(sender).get("Balances").update(currency,self.users.get(sender).get("Balances").get(currency)-amount)
-      self.users.get(reciever).get("Balances").update(currency,self.users.get(reciever).get("Balances").get(currency)+amount)
+        url="https://api.exchangeratesapi.io/latest?base="+base
+        response = requests.get(url)
+        data = response.text
+        parsed = json.loads(data)
+        rates = parsed["rates"]
+        return rates[to]
 
 def get_rates(base):#Returns rates as dict
-    url="https://api.exchangeratesapi.io/latest?base="+base
+    url = "https://api.exchangeratesapi.io/latest?base="+base
     response = requests.get(url)
     data = response.text
     parsed = json.loads(data)
@@ -158,4 +180,7 @@ def css(filepath):
 debug(True)
 app = default_app()
 if __name__=="__main__":
+    if db.save_exists():
+        db.load()
     run()
+    db.save()
