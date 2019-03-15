@@ -18,12 +18,12 @@
 }
 
 @-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
+  from {-webkit-transform: scale(0)}
   to {-webkit-transform: scale(1)}
 }
-  
+
 @keyframes animatezoom {
-  from {transform: scale(0)} 
+  from {transform: scale(0)}
   to {transform: scale(1)}
 }
 
@@ -98,6 +98,7 @@ body{
   height: 73%;
 }
 
+/*=========================LEFT=CONTENT========================*/
 .left-side{
   float: left;
   background-color: rgba(130,173,169,0.9);
@@ -109,64 +110,7 @@ body{
   text-align: center;
 }
 
-.center{
-  float: left;
-  background-color: rgba(229,255,255,0.9);
-  height: 88%;
-  width: 66%;
-  margin: 0.5%;
-  padding: 1.5%;
-	border-radius: 4% 6% 4% 6%;
-  text-align: center;
-}
-
-.currency-catalog{
-  overflow: scroll;
-  border-radius: 5%;
-  height: 90%;
-  width: 92%;
-  margin: 4%;
-  color: #ffffff;
-}
-
-.currency-catalog-item{
-  background-color:  rgba(38,50,56,0.9);
-  border-radius: 5%;
-  height: 15%;
-  width: 20%;
-  margin: 5% 5% 5% 7%;
-  float:left;
-  padding-top: 2%;
-  text-align: center;
-  text-decoration: none;
-  color: #ffffff;
-  vertical-align: middle;
-  text-align: center;
-}
-
-.currency-catalog-item:hover{
-  animation: button-lighten-up 1s ease 0s 1;
-  background-color: rgba(130,173,169,0.9);
-}
-
-.right-side{
-  float: right;
-  background-color: rgba(178,223,219,0.9);
-  height: 80%;
-  width: 10%;
-  margin: 1%;
-  padding: 1.5%;
-	border-radius: 4% 6% 4% 6%;
-  text-align: center;
-}
-
-.footer{
-  float: right;
-  margin: 0.5%;
-  padding: 0.5%;
-	border-radius: 5%;
-  background-color: rgba(130,173,169,0.2);
-}
+/*============================Login Modal=======================*/
 
 /* Full-width input fields */
 input[type=text], input[type=password]{
@@ -181,6 +125,7 @@ input[type=text], input[type=password]{
 /* Set a style for all buttons */
 button{
   background-color: rgba(38,50,56,0.9);
+  border-radius: 10%;
   color: white;
   padding: 14px 20px;
   margin: 1% 0;
@@ -197,6 +142,7 @@ button:hover{
 .cancelbtn{
   width: auto;
   padding: 1% 2%;
+  border-radius: 10; 
   background-color: #f44336;
 }
 
@@ -253,7 +199,6 @@ span.psw{
   cursor: pointer;
 }
 
-
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px){
   span.psw{
@@ -263,4 +208,69 @@ span.psw{
   .cancelbtn{
      width: 100%;
   }
+}
+
+/*==================CENTER=CONTENT=======================*/
+
+.center{
+  float: left;
+  background-color: rgba(229,255,255,0.9);
+  height: 88%;
+  width: 66%;
+  margin: 0.5%;
+  padding: 1.5%;
+	border-radius: 4% 6% 4% 6%;
+  text-align: center;
+}
+
+.currency-catalog{
+  overflow: scroll;
+  border-radius: 5%;
+  height: 90%;
+  width: 92%;
+  margin: 4%;
+  color: #ffffff;
+}
+
+.currency-catalog-item{
+  background-color:  rgba(38,50,56,0.9);
+  border-radius: 5%;
+  height: 15%;
+  width: 20%;
+  margin: 5% 5% 5% 7%;
+  float:left;
+  padding-top: 2%;
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.currency-catalog-item:hover{
+  animation: button-lighten-up 1s ease 0s 1;
+  background-color: rgba(130,173,169,0.9);
+}
+
+/*==================RIGHT=CONTENT=======================*/
+
+.right-side{
+  float: right;
+  background-color: rgba(178,223,219,0.9);
+  height: 80%;
+  width: 10%;
+  margin: 1%;
+  padding: 1.5%;
+	border-radius: 4% 6% 4% 6%;
+  text-align: center;
+}
+
+/*=========================FOOTER========================*/
+
+.footer{
+  float: right;
+  margin: 0.5%;
+  padding: 0.5%;
+	border-radius: 5%;
+  background-color: rgba(130,173,169,0.2);
 }
