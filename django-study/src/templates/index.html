@@ -38,6 +38,9 @@
       <hr style="clear:both;" />
 			<div class="content">
 				<div class="left-side">
+					<h1>Hello {{request.user}}</h1>
+					You are authenticated: {{request.user.is_authenticated}}
+					<p>This is a template</p>
 					Left-Side Content...
 				</div>
 				<div class="center">
