@@ -21,7 +21,10 @@ from .models import Product
 #     return render(request,"product_create.html",context)
 
 def product_create_view(request):
-    form = ProductForm(request.POST or None)
+    initial_data = {
+        'title': "My awesome title"
+    }
+    form = ProductForm(request.POST or None, initial=initial_data)
     if form.is_valid():
         form.save()
         form = ProductForm()
@@ -32,6 +35,8 @@ def product_create_view(request):
     return render(request, "products/product_create.html", context)
 
 def product_detail_view(request,*args, **kwargs): # *args, **kwargs
+    print(request)
+    help(request)
     obj = Product.objects.get(id=1)
     context = {
     "object":obj
