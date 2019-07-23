@@ -20,6 +20,13 @@ from .models import Product
 #     }
 #     return render(request,"product_create.html",context)
 
+def dynamic_lookup_view(request, my_id):
+    obj = Product.objects.get(id=my_id)
+    context = {
+        "object": obj
+    }
+    return render(request, "products/product_detail.html", context)
+
 def product_create_view(request):
     initial_data = {
         'title': "My awesome title"
@@ -35,8 +42,6 @@ def product_create_view(request):
     return render(request, "products/product_create.html", context)
 
 def product_detail_view(request,*args, **kwargs): # *args, **kwargs
-    print(request)
-    help(request)
     obj = Product.objects.get(id=1)
     context = {
     "object":obj
