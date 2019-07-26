@@ -2,6 +2,9 @@
 
 {% block content %}
 <h1>Looking up product</h1>
-{{ object.title }}
-<p>This is a template frontpage</p>
+Title: <b>{{ object.title }}</b>
+<br>
+Price: {{ object.price }}
+<br>
+Description: {{ object.description }}
 {% endblock %}
