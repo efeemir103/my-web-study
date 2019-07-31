@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .forms import ProductForm, RawProductForm
+from .forms import ProductModelForm, RawProductForm
 
 from .models import Product
 # Create your views here.
@@ -56,10 +56,10 @@ def product_create_view(request):
     initial_data = {
         'title': "My awesome title"
     }
-    form = ProductForm(request.POST or None, initial=initial_data)
+    form = ProductModelForm(request.POST or None, initial=initial_data)
     if form.is_valid():
         form.save()
-        form = ProductForm()
+        form = ProductModelForm()
     
     context = {
         'form': form
