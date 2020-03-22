@@ -1,0 +1,71 @@
+<html lang="en">
+    <head>
+        <title>Shopping List</title>
+        <link rel="stylesheet" href="./node_modules/materialize-css/dist/css/materialize.min.css">
+        <script src="./node_modules/materialize-css/dist/js/materialize.min.js"></script>
+        <link href="./icons/material-icons/material-icons.css" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper">
+                <a class="brand-logo center">Shopping List</a>
+            </div>
+        </nav>
+        <ul></ul>
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large green">
+                <i class="large material-icons">edit</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating yellow darken-2" id="addBtn">
+                    <i class="material-icons">add</i>
+                </a></li>
+                <li><a class="btn-floating red" id="clearBtn">
+                    <i class="material-icons">delete</i>
+                </a></li>
+            </ul>
+        </div>
+        <script>
+            const ul = document.querySelector('ul');
+
+            // Add item.
+            window.api.receive('item:add', function(e, item) {
+                ul.className = 'collection';
+                const li = document.createElement('li');
+                li.className = 'collection-item';
+                const itemText = document.createTextNode(item);
+                li.appendChild(itemText);
+                ul.appendChild(li);
+            });
+
+            // Clear items.
+            window.api.receive('item:clear', function() {
+                ul.innerHTML = '';
+                ul.className = '';
+            });
+
+            // Remove item.
+            ul.addEventListener('dblclick', e => {
+                e.target.remove();
+                if(ul.children.length == 0) {
+                    ul.className = '';
+                }
+            });
+
+            // FAB.
+            document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('.fixed-action-btn');
+                var instances = M.FloatingActionButton.init(elems, {});
+            });
+
+            // Functionality of FAB options.
+            addBtn = document.querySelector('#addBtn');
+            addBtn.addEventListener('click', e => window.api.send('window:add') );
+            clearBtn = document.querySelector('#clearBtn');
+            clearBtn.addEventListener('click', e => {
+                ul.innerHTML = '';
+                ul.className = '';
+            });
+        </script>
+    </body>
+</html>
