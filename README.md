@@ -7,4 +7,4 @@
 
 Sources I use to study from (Thank you &lt;3):
 Traversy Media (Youtube Channel)
-freeCodeCamp (Youtube Channel)
+freeCodeCamp.org (Youtube Channel)
