@@ -1,4 +1,5 @@
-# svelte app template
+# Svelte Scoreboard
+A simple scoreboard app.
 
 ```bash
 npx degit sveltejs/template svelte-scoreboard
