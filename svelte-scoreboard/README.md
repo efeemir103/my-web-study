@@ -1,14 +1,6 @@
 # Svelte Scoreboard
 A simple scoreboard app.
 
-```bash
-npx degit sveltejs/template svelte-scoreboard
-cd svelte-scoreboard
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
-
 ## Get started
 
 Install the dependencies...
