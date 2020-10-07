@@ -1,6 +1,8 @@
-from bottle import route, run, request, template, static_file, get, os, default_app, debug
+from bottle import route, run, request, template, static_file, get, os, default_app, debug, TEMPLATE_PATH
 from hashlib import sha256
 import os, json, requests, secrets
+
+TEMPLATE_PATH.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "view")))
 
 starter_currency={"USD":1000}
 
@@ -154,13 +156,7 @@ def get_rates(base):#Returns rates as dict
     return rates
 
 @route('/')
-def index():
-    return template('index', curr_names=supported_currencies)
-
 @route('/index')
-def index():
-    return template('index', curr_names=supported_currencies)
-
 @route('/index.html')
 def index():
     return template('index', curr_names=supported_currencies)
