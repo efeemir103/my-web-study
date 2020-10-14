@@ -7,6 +7,8 @@ This is a booklist webapp made with ASP.Net Core Razor Pages. Tutorial used:
 
 dotnet new webapp ---> Create Razor Pages Web App
 
+dotnet run ---> Run the app
+
 dotnet ef migrations add ---> Add a new migration
 
 dotnet ef database update ---> Update database and migrations
