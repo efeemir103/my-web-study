@@ -12,5 +12,7 @@ namespace dotnet_razor_book_list.Model {
         [Required]
         public string Name { get; set; }
         public string Author { get; set; }
+
+        public string ISBN { get; set; }
     }
 }
