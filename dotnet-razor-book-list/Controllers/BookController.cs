@@ -24,18 +24,18 @@ namespace dotnet_razor_book_list.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Json(new { data = await _db.Book.ToListAsync() });
+            return Json(new { data = await _db.Books.ToListAsync() });
         }
 
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
-            var BookFromDb = await _db.Book.FirstOrDefaultAsync(u => u.Id == id);
+            var BookFromDb = await _db.Books.FirstOrDefaultAsync(u => u.Id == id);
             if(BookFromDb == null) {
                 return Json(new { success = false, message = "Error while deleting" });
             }
             
-            _db.Book.Remove(BookFromDb);
+            _db.Books.Remove(BookFromDb);
             await _db.SaveChangesAsync();
             return Json(new { success = true, message = "Delete was successful" });
         }

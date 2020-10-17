@@ -23,13 +23,13 @@ namespace dotnet_razor_book_list.Pages.BookList
 
         public async Task OnGet(int Id)
         {
-            Book = await _db.Book.FindAsync(Id);
+            Book = await _db.Books.FindAsync(Id);
         }
 
         public async Task<IActionResult> OnPost()
         {
             if(ModelState.IsValid) {
-                var BookFromDb = await _db.Book.FindAsync(Book.Id);
+                var BookFromDb = await _db.Books.FindAsync(Book.Id);
                 BookFromDb.Name = Book.Name;
                 BookFromDb.Author = Book.Author;
                 BookFromDb.ISBN = Book.ISBN;

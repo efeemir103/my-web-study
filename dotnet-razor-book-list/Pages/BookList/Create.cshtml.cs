@@ -28,7 +28,7 @@ namespace dotnet_razor_book_list.Pages.BookList
         public async Task<IActionResult> OnPost()
         {
             if(ModelState.IsValid) {
-                await _db.Book.AddAsync(Book);
+                await _db.Books.AddAsync(Book);
                 await _db.SaveChangesAsync();
                 return RedirectToPage("Index");
             } else {

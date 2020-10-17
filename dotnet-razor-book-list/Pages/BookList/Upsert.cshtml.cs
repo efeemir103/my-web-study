@@ -31,7 +31,7 @@ namespace dotnet_razor_book_list.Pages.BookList
             }
 
             // Update
-            Book = await _db.Book.FirstOrDefaultAsync(u => u.Id == Id);
+            Book = await _db.Books.FirstOrDefaultAsync(u => u.Id == Id);
             if(Book == null){
                 return NotFound();
             }
@@ -43,9 +43,9 @@ namespace dotnet_razor_book_list.Pages.BookList
         {
             if(ModelState.IsValid) {
                 if(Book.Id == 0) {
-                    _db.Book.Add(Book);
+                    _db.Books.Add(Book);
                 } else {
-                    _db.Book.Update(Book);
+                    _db.Books.Update(Book);
                 }
 
                 await _db.SaveChangesAsync();
