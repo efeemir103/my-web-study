@@ -14,3 +14,5 @@ dotnet ef migrations add ---> Add a new migration
 dotnet ef database update ---> Update database and migrations
 
 dotnet new page --name --namespace --output ---> Add a new Razor Page
+
+dotnet new gitignore ---> Add a gitignore file
