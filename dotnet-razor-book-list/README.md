@@ -16,3 +16,9 @@ dotnet ef database update ---> Update database and migrations
 dotnet new page --name --namespace --output ---> Add a new Razor Page
 
 dotnet new gitignore ---> Add a gitignore file
+
+dotnet user-secrets init ---> Add a safe storage for app
+
+dotnet user-secrets set ---> Add a secret
+
+dotnet add package ---> Add/Install a package
