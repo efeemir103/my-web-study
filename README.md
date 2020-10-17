@@ -4,6 +4,8 @@
   * Javascript
   * HTML5
   * CSS
+  * C#
+  * Java
 
 Sources I use to study from (Thank you &lt;3):
 
